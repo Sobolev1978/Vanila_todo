@@ -37,9 +37,16 @@ const formChoiceHandler = (e) => {
 
 formChoice.onclick = (e) => formChoiceHandler(e)
 
-
 button.addEventListener('click', (e) => {
     e.preventDefault();
+    createTodo()
+    if (selectedLi) {
+        selectedLi.classList.remove('active');
+        selectedLi = null;
+    }
+});
+
+createTodo = function () {
     const infoItem = document.createElement('li');
     infoItem.textContent = '';
     infoItem.classList.add('info_item');
@@ -61,4 +68,4 @@ button.addEventListener('click', (e) => {
     infoContent.classList.add('info_content');
     infoItem.append(infoContent);
     infoContent.textContent = formInput.value;
-});
+}
