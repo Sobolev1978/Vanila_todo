@@ -1,0 +1,121 @@
+.inner_content{
+    max-width: 500px;
+    margin: 100px auto 0;
+}
+
+.text_form {
+    margin: 0 0 40px;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.form_content {
+    position: relative;
+}
+
+.form_content input{
+    width: 100%;
+    padding: 10px 220px 10px 10px;
+    box-sizing: border-box;
+}
+
+.form_content .form_click {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.form_content .form_list {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 70px;
+}
+
+.form_click {
+    font-size: 14px;
+    line-height: 17px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    background-color: #7bccb5;
+    display: block;
+    border: none;
+    border-radius: 3px;
+    color: #fefcff;
+   cursor: pointer;
+}
+
+.form_list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    width: 140px;
+    justify-content: space-between;
+}
+
+#info_list {
+    margin: 0 0 40px;
+    padding: 0;
+    list-style: none;
+}
+
+#info_list li + li {
+    margin-top: 15px;
+}
+
+#info_list li.active {
+    background-color: #ccc !important;
+    text-decoration: line-through;
+}
+
+.form_list li {
+    position: relative;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+
+}
+
+.form_list li.active::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #cd7f32;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.info_item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 9px 10px 8px;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    border-radius: 3px;
+}
+
+.info_item::after {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 105%;
+    background-color: #fefcff;
+    top: -1px;
+    left: 40px;
+}
+
+.info_content {
+    padding-left: 30px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
