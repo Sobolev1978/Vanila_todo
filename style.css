@@ -1,10 +1,10 @@
 .inner_content{
     max-width: 500px;
-    margin: 100px auto 0;
+    margin: 50px auto 0;
 }
 
 .text_form {
-    margin: 0 0 40px;
+    margin: 0 0 10px;
     padding: 0;
     font-size: 16px;
     font-weight: 600;
@@ -16,8 +16,11 @@
 
 .form_content input{
     width: 100%;
-    padding: 10px 220px 10px 10px;
+    padding: 16px 220px 17px 10px;
     box-sizing: border-box;
+    outline: none;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
 }
 
 .form_content .form_click {
@@ -45,6 +48,7 @@
     border-radius: 3px;
     color: #fefcff;
    cursor: pointer;
+    outline: none;
 }
 
 .form_list {
@@ -57,18 +61,18 @@
 }
 
 #info_list {
-    margin: 0 0 40px;
+    margin: 0 0 15px;
     padding: 0;
     list-style: none;
 }
 
 #info_list li + li {
-    margin-top: 15px;
+    margin-top: 1px;
 }
 
 #info_list li.active {
     background-color: #ccc !important;
-    text-decoration: line-through;
+    text-decoration: line-through #ffffff;
 }
 
 .form_list li {
@@ -94,27 +98,26 @@
     position: relative;
     display: flex;
     align-items: center;
-    padding: 9px 10px 8px;
+    padding: 15px 15px 16px;
     box-sizing: border-box;
-    border: 1px solid #000000;
     border-radius: 3px;
 }
 
 .info_item::after {
     content: "";
     position: absolute;
-    width: 3px;
+    width: 1px;
     height: 105%;
     background-color: #fefcff;
     top: -1px;
-    left: 40px;
+    left: 50px;
 }
 
 .info_content {
     padding-left: 30px;
     box-sizing: border-box;
     font-size: 16px;
-    color: #000000;
+    color: #ffffff;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
