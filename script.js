@@ -5,28 +5,26 @@ const item = formChoice.querySelectorAll('li');
 const formInput = document.querySelector('#form_input');
 const colorPicker = ['#0000ff', '#ffa400', '#008000', '#ff0000', '#00d669', '#530cff'];
 const TODO_ITEM = 'todoItem';
+const todoArr = getAll(TODO_ITEM) || [];
 
+window.addEventListener('load', (e) => {
+    todoArr.map((currentValue) => {
+        createTodo(currentValue)
+    })
+})
 
 function saveAll(key, data) {
-    const todoArr = getAll(key) || [];
     todoArr.push(data);
     localStorage.setItem(key, JSON.stringify(todoArr));
+}
+
+function save(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
 }
 
 function getAll(key) {
     const json = localStorage.getItem(key);
     return JSON.parse(json);
-}
-
-function get(id, key) {
-    let obj = getAll(id);
-}
-
-function edit(id, key, newValue) {
-    let obj = getAll(id);
-
-    obj[key] = newValue;
-    saveAll(obj);
 }
 
 randomColor = (arrColor) => {
@@ -40,16 +38,11 @@ randomColor = (arrColor) => {
     return color;
 };
 
-// for (let i = 0; i < item.length; i++) {
-//     item[i].classList.add('choice_item');
-//     if (i === item.length - 1) {
-//         item[i].classList.add('active');
-//     }
-// }
-
-
 let selectedLi;
+let defaultLi;
 const formChoiceHandler = (e) => {
+    defaultLi = formChoice.querySelector('.active');
+    defaultLi.classList.remove('active')
     let target = e.target;
 
     if (selectedLi) {
@@ -70,21 +63,23 @@ button.addEventListener('click', (e) => {
         id: String(Date.now())
     }
     saveAll(TODO_ITEM, todoItem);
-    formInput.placeholder = '';
     createTodo(todoItem)
 
     if (selectedLi) {
         selectedLi.classList.remove('active');
+        defaultLi.classList.add('active');
         selectedLi = null;
     }
 
+    formInput.value = '';
 });
-
-
 
 createTodo = function (todoItem) {
     const infoItem = document.createElement('li');
     infoItem.classList.add('info_item');
+    if (todoItem.checked) {
+        infoItem.classList.add('active');
+    }
     infoItem.style.backgroundColor = todoItem.color;
     infoList.append(infoItem);
 
@@ -95,11 +90,20 @@ createTodo = function (todoItem) {
     infoCheckbox.classList.add('info_check');
     infoCheckbox.id = todoItem.id
 
+    if (todoItem.checked) {
+        infoCheckbox.checked = true
+    }
+
     infoCheckbox.onchange = function (e) {
         infoItem.classList.toggle('active');
         const targetId = e.target.id;
-        const store = getAll(TODO_ITEM);
-        const task = store.find(item => item.id === targetId);
+        const store = todoArr.map(item => {
+            if (item.id === targetId) {
+                item.checked = !item.checked
+            }
+            return item
+        })
+        save(TODO_ITEM, store);
     };
 
     const infoContent = document.createElement('div');
@@ -107,7 +111,3 @@ createTodo = function (todoItem) {
     infoItem.append(infoContent);
     infoContent.textContent = todoItem.text;
 }
-
-window.addEventListener('storage', (e) => {
-    createTodo();
-})
