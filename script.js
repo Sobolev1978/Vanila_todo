@@ -7,12 +7,6 @@ const colorPicker = ['#0000ff', '#ffa400', '#008000', '#ff0000', '#00d669', '#53
 const TODO_ITEM = 'todoItem';
 const todoArr = getAll(TODO_ITEM) || [];
 
-window.addEventListener('load', (e) => {
-    todoArr.map((currentValue) => {
-        createTodo(currentValue)
-    })
-})
-
 function saveAll(key, data) {
     todoArr.push(data);
     localStorage.setItem(key, JSON.stringify(todoArr));
@@ -29,13 +23,7 @@ function getAll(key) {
 
 randomColor = (arrColor) => {
     const mathRandom = Math.floor(Math.random() * colorPicker.length);
-    let color;
-    arrColor.map(function (elem, index) {
-        if (index === mathRandom) {
-            color = elem;
-        }
-    });
-    return color;
+    return arrColor[mathRandom];
 };
 
 let selectedLi;
@@ -43,7 +31,7 @@ let defaultLi;
 const formChoiceHandler = (e) => {
     defaultLi = formChoice.querySelector('.active');
     defaultLi.classList.remove('active')
-    let target = e.target;
+    const target = e.target;
 
     if (selectedLi) {
         selectedLi.classList.remove('active');
@@ -83,8 +71,7 @@ createTodo = function (todoItem) {
     infoItem.style.backgroundColor = todoItem.color;
     infoList.append(infoItem);
 
-
-    let infoCheckbox = document.createElement('input');
+    const infoCheckbox = document.createElement('input');
     infoCheckbox.type = 'checkbox';
     infoItem.append(infoCheckbox);
     infoCheckbox.classList.add('info_check');
@@ -111,3 +98,7 @@ createTodo = function (todoItem) {
     infoItem.append(infoContent);
     infoContent.textContent = todoItem.text;
 }
+
+    todoArr.forEach((currentValue) => {
+        createTodo(currentValue)
+    })
