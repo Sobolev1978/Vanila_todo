@@ -19,7 +19,12 @@ const save = (key, data) => {
 
 const getAll = (key) => {
     const json = localStorage.getItem(key);
-    return JSON.parse(json);
+    let todoArr = JSON.parse(json);
+    if (todoArr === null) {
+        todoArr = [];
+    }
+
+    return todoArr;
 }
 
 const randomColor = (arrColor) => {
@@ -36,7 +41,7 @@ const selectLi = (color) => {
     selectedLi.classList.add('active');
 }
 
-const formChoiceHandler = (color) => (e) => {
+const formChoiceHandler = (color) => () => {
     selectLi(color);
 }
 
@@ -99,7 +104,7 @@ const createTodo = (todoItem) => {
     infoContent.textContent = todoItem.text;
 }
 
-const todoArr = getAll(TODO_ITEM) || [];
+let todoArr = getAll(TODO_ITEM);
 
 todoArr.forEach((currentValue) => {
     createTodo(currentValue)
