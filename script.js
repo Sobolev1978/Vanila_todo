@@ -1,7 +1,7 @@
 const button = document.querySelector('#form_btn');
 const infoList = document.querySelector('#info_list');
 const formChoice = document.querySelector('#form_choice');
-const item = formChoice.querySelectorAll('li');
+const formChildes  = formChoice.getElementsByTagName('li');
 const formInput = document.querySelector('#form_input');
 const colorPicker = ['blue', 'orange', 'green', 'red', 'light_green', 'violet'];
 const TODO_ITEM = 'todoItem';
@@ -23,8 +23,8 @@ const getAll = (key) => {
 }
 
 const randomColor = (arrColor) => {
-    const mathRandom = Math.floor(Math.random() * colorPicker.length);
-    return arrColor[mathRandom];
+    const randomIndex = Math.floor(Math.random() * (colorPicker.length - 1));
+    return arrColor[randomIndex];
 }
 
 const selectLi = (color) => {
@@ -40,9 +40,6 @@ const formChoiceHandler = (color) => (e) => {
     selectLi(color);
 }
 
-formChoice.onclick = (e) => formChoiceHandler(e)
-
-const formChildes  = formChoice.getElementsByTagName('li');
 for (let i = 0; i < formChildes.length; i++) {
     formChildes[i].onclick = formChoiceHandler(colorPicker[i]);
 }
