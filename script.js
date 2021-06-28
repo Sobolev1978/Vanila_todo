@@ -24,7 +24,7 @@ function getAll(key) {
 randomColor = (arrColor) => {
     const mathRandom = Math.floor(Math.random() * colorPicker.length);
     return arrColor[mathRandom];
-};
+}
 
 let selectedLi;
 let defaultLi;
@@ -60,7 +60,7 @@ button.addEventListener('click', (e) => {
     }
 
     formInput.value = '';
-});
+})
 
 createTodo = function (todoItem) {
     const infoItem = document.createElement('li');
@@ -91,7 +91,7 @@ createTodo = function (todoItem) {
             return item
         })
         save(TODO_ITEM, store);
-    };
+    }
 
     const infoContent = document.createElement('div');
     infoContent.classList.add('info_content');
