@@ -83,6 +83,30 @@
 
 }
 
+.blue {
+    background-color: #0000ff;
+}
+
+.orange {
+    background-color: #ffa400;
+}
+
+.green {
+    background-color: #008000;
+}
+
+.red {
+    background-color: #ff0000;
+}
+
+.light_green {
+    background-color: #00d669;
+}
+
+.violet {
+    background-color: #530cff;
+}
+
 .form_list li.active::before {
     content: "";
     position: absolute;

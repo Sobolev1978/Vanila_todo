@@ -3,8 +3,10 @@ const infoList = document.querySelector('#info_list');
 const formChoice = document.querySelector('#form_choice');
 const item = formChoice.querySelectorAll('li');
 const formInput = document.querySelector('#form_input');
-const colorPicker = ['#0000ff', '#ffa400', '#008000', '#ff0000', '#00d669', '#530cff'];
+const colorPicker = ['blue', 'orange', 'green', 'red', 'light_green', 'violet'];
 const TODO_ITEM = 'todoItem';
+let selectedLiClass;
+let selectedLi;
 
 const saveAll = (key, data) => {
     todoArr.push(data);
@@ -25,40 +27,42 @@ const randomColor = (arrColor) => {
     return arrColor[mathRandom];
 }
 
-let selectedLi;
-let defaultLi;
-const formChoiceHandler = (e) => {
-    defaultLi = formChoice.querySelector('.active');
-    defaultLi.classList.remove('active')
-    const target = e.target;
-
+const selectLi = (color) => {
     if (selectedLi) {
-        selectedLi.classList.remove('active');
+        selectedLi.classList.remove('active')
     }
-    selectedLi = target;
+    selectedLiClass = color;
+    selectedLi = formChoice.querySelector(`.${color}`);
     selectedLi.classList.add('active');
+}
+
+const formChoiceHandler = (color) => (e) => {
+    selectLi(color);
 }
 
 formChoice.onclick = (e) => formChoiceHandler(e)
 
+const formChildes  = formChoice.getElementsByTagName('li');
+for (let i = 0; i < formChildes.length; i++) {
+    formChildes[i].onclick = formChoiceHandler(colorPicker[i]);
+}
+
+selectLi(randomColor(colorPicker));
+
 button.addEventListener('click', (e) => {
     e.preventDefault();
-    const todoItem = {
-        color: selectedLi ? selectedLi.style.backgroundColor : randomColor(colorPicker),
-        checked: false,
-        text: formInput.value,
-        id: String(Date.now())
+    if (formInput.value.trim()) {
+        const todoItem = {
+            color: selectedLiClass,
+            checked: false,
+            text: formInput.value,
+            id: String(Date.now())
+        }
+        saveAll(TODO_ITEM, todoItem);
+        createTodo(todoItem)
+        selectLi(randomColor(colorPicker));
+        formInput.value = '';
     }
-    saveAll(TODO_ITEM, todoItem);
-    createTodo(todoItem)
-
-    if (selectedLi) {
-        selectedLi.classList.remove('active');
-        defaultLi.classList.add('active');
-        selectedLi = null;
-    }
-
-    formInput.value = '';
 })
 
 const createTodo = (todoItem) => {
@@ -67,7 +71,7 @@ const createTodo = (todoItem) => {
     if (todoItem.checked) {
         infoItem.classList.add('active');
     }
-    infoItem.style.backgroundColor = todoItem.color;
+    infoItem.classList.add(todoItem.color);
     infoList.append(infoItem);
 
     const infoCheckbox = document.createElement('input');
