@@ -5,23 +5,22 @@ const item = formChoice.querySelectorAll('li');
 const formInput = document.querySelector('#form_input');
 const colorPicker = ['#0000ff', '#ffa400', '#008000', '#ff0000', '#00d669', '#530cff'];
 const TODO_ITEM = 'todoItem';
-const todoArr = getAll(TODO_ITEM) || [];
 
-function saveAll(key, data) {
+const saveAll = (key, data) => {
     todoArr.push(data);
     localStorage.setItem(key, JSON.stringify(todoArr));
 }
 
-function save(key, data) {
+const save = (key, data) => {
     localStorage.setItem(key, JSON.stringify(data));
 }
 
-function getAll(key) {
+const getAll = (key) => {
     const json = localStorage.getItem(key);
     return JSON.parse(json);
 }
 
-randomColor = (arrColor) => {
+const randomColor = (arrColor) => {
     const mathRandom = Math.floor(Math.random() * colorPicker.length);
     return arrColor[mathRandom];
 }
@@ -62,7 +61,7 @@ button.addEventListener('click', (e) => {
     formInput.value = '';
 })
 
-createTodo = function (todoItem) {
+const createTodo = (todoItem) => {
     const infoItem = document.createElement('li');
     infoItem.classList.add('info_item');
     if (todoItem.checked) {
@@ -81,7 +80,7 @@ createTodo = function (todoItem) {
         infoCheckbox.checked = true
     }
 
-    infoCheckbox.onchange = function (e) {
+    infoCheckbox.onchange = (e) => {
         infoItem.classList.toggle('active');
         const targetId = e.target.id;
         const store = todoArr.map(item => {
@@ -99,6 +98,8 @@ createTodo = function (todoItem) {
     infoContent.textContent = todoItem.text;
 }
 
-    todoArr.forEach((currentValue) => {
-        createTodo(currentValue)
-    })
+const todoArr = getAll(TODO_ITEM) || [];
+
+todoArr.forEach((currentValue) => {
+    createTodo(currentValue)
+})
